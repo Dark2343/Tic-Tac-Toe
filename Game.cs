@@ -62,17 +62,3 @@ namespace TicTacToe
         }
     }
 }
-
-/*
-private static void Main(){
-            Form mainForm = new Form();
-            Label lblFirst = new Label();
-            mainForm.Width = 300;
-            mainForm.Height = 400; 
-            lblFirst.Text = "Hello World";
-            lblFirst.Location = new Point(150,200);
-            mainForm.Controls.Add(lblFirst);
-            Application.Run(mainForm);
-        }
-
-*/
