@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iXr4fKrrNnkO6KrXp2f1RcxgYy/UcWBIr765HPb7nZNo+QErM860AuG9gv2MVlvT+kutuqJMTx1msryjM6XPKg==",
+  "dgSpecHash": "ITj086z6gQbmGKo7sxYmMrRqei/3K2kaSRcjIPw5rWQ6lO5FixCvQCKcUBC0hqJ14nQlhG6VE2IEdWhYlVa3Ig==",
   "success": true,
-  "projectFilePath": "D:\\Programming\\Projects\\C#\\XO\\XO.csproj",
+  "projectFilePath": "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\XO.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

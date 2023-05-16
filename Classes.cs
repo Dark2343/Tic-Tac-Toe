@@ -1,66 +1,64 @@
-﻿using System;
-
-namespace TicTacToe 
+﻿namespace XO 
 {
-    abstract class Board {
-        protected int n;
-        protected char[,] grid;
+    internal abstract class Board {
+        private readonly int _n;
+        protected readonly char[,] Grid;
 
-        public Board(int N)
+        protected Board(int n)
         {
-            n = N;
-            grid = new char[n, n];
+            _n = n;
+            Grid = new char[_n, _n];
         }
 
-        public abstract bool updateBoard(int x, int y, char symbol);
-        public abstract bool isWinner(char symbol);
-        public abstract bool isDraw();
-        public void resetBoard()
+        public abstract bool UpdateBoard(int x, int y, char symbol);
+        public abstract bool IsWinner(char symbol);
+        public abstract bool IsDraw();
+        public void ResetBoard()
         {
-            for (int i = 0; i < n; i++) 
+            for (var i = 0; i < _n; i++) 
             {
-                for (int j = 0; j < n; j++) 
+                for (var j = 0; j < _n; j++) 
                 {
-                    this.grid[i,j] = ' ';
+                    this.Grid[i,j] = ' ';
                 }
             }
         }
 
-        public void displayBoard() 
+        public void DisplayBoard() 
         {
-            for (int i = 0; i < n; i++) 
+            for (var i = 0; i < _n; i++) 
             {
-                for (int j = 0; j < n; j++) 
+                for (var j = 0; j < _n; j++) 
                 {
-                    Console.Write("| " + grid[i, j] + " |");
+                    Console.Write("| " + Grid[i, j] + " |");
                 }
                 Console.WriteLine();
             }
         }
     }
 
-    class XO : Board
+    internal class Xo : Board
     {
-        public XO() : base(3) {}
-        public override bool updateBoard(int x, int y, char symbol)
+        public Xo() : base(3) {}
+        public override bool UpdateBoard(int x, int y, char symbol)
         {
-            if (x - 1 < 3 && y - 1 < 3 && this.grid[x,y] != 'X' && this.grid[x,y] != 'O')
+            if (x - 1 < 3 && y - 1 < 3 && this.Grid[x,y] != 'X' && this.Grid[x,y] != 'O')
             {
-                this.grid[x,y] = symbol;
+                this.Grid[x,y] = symbol;
                 return true;
             }
             else {return false;}
         }
-        public override bool isWinner(char symbol)
+        public override bool IsWinner(char symbol)
         {
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
+                for (var j = 0; j < 3; j++)
                 {
-                    if((this.grid[i,0] == symbol && this.grid[i,1] == symbol && this.grid[i,2] == symbol) ||
-                    (this.grid[0,j] == symbol && this.grid[1,j] == symbol && this.grid[2,j] == symbol) ||
-                    (this.grid[0,0] == symbol && this.grid[1,1] == symbol && this.grid[2,2] == symbol) ||
-                    (this.grid[0,2] == symbol && this.grid[1,1] == symbol && this.grid[2,0] == symbol))      // This can be optimized 
+                    if((this.Grid[i,0] == symbol && this.Grid[i,1] == symbol && this.Grid[i,2] == symbol) ||
+                    (this.Grid[0,j] == symbol && this.Grid[1,j] == symbol && this.Grid[2,j] == symbol) ||
+                    (this.Grid[0,0] == symbol && this.Grid[1,1] == symbol && this.Grid[2,2] == symbol) ||
+                    (this.Grid[0,2] == symbol && this.Grid[1,1] == symbol && this.Grid[2,0] == symbol)) 
                     {  
                         return true;
                     }
@@ -68,15 +66,15 @@ namespace TicTacToe
             }
             return false;
         }
-        public override bool isDraw()
+        public override bool IsDraw()
         {
-            if(this.isWinner('X') == false && this.isWinner('O') == false){
+            if(this.IsWinner('X') == false && this.IsWinner('O') == false){
                 
                 for (int i = 0; i < 3; i++)
                 {
                     for (int j = 0; j < 3; j++)
                     {
-                        if (this.grid[i,j] != 'X' && this.grid[i,j] != 'O')
+                        if (this.Grid[i,j] != 'X' && this.Grid[i,j] != 'O')
                         {
                             return false;
                         }
@@ -90,59 +88,60 @@ namespace TicTacToe
 
     class Player
     {
-        private string name;
-        public string getName {get {return name;}}
-        private char symbol;
-        public char getSymbol {get {return symbol;}}
-        public Player(string NAME, char SYMBOL)
+        public string GetName { get; }
+        public char GetSymbol { get; }
+
+        public Player(string name, char symbol)
         {
-            name = NAME;
-            symbol = SYMBOL;
+            GetName = name;
+            GetSymbol = symbol;
         }
     }
 
     class Game
     {
-        private int turn;
-        private XO board;
-        private Player[] players;
-        public Game(XO BOARD, Player[] P)
+        private int _turn;
+        private readonly Xo _board;
+        private readonly Player[] _players;
+        public Game(Xo board, Player[] p)
         {
-            board = BOARD;
-            players = P;
+            _board = board;
+            _players = p;
         }
-        public void playGame()
+        public void PlayGame()
         {
-            board.resetBoard();
+            _board.ResetBoard();
+            int x = 0, y = 0;
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine(players[0].getName + ": " + players[0].getSymbol);
-                Console.WriteLine(players[1].getName + ": " + players[1].getSymbol);
-                board.displayBoard();
-                
-                int x, y;
+                Console.WriteLine(_players[0].GetName + ": " + _players[0].GetSymbol);
+                Console.WriteLine(_players[1].GetName + ": " + _players[1].GetSymbol);
+                _board.DisplayBoard();
 
-                Console.WriteLine(players[turn].getName + ", please choose where you want to play:");
+                Console.WriteLine(_players[_turn].GetName + ", please choose where you want to play:");
 
-                string input = Console.ReadLine();      // This is so the user can enter the 2 inputs on the same line,
-                var data = input.Split(' ');            // We should prob also make a case for if he enters 1 input then presses enter, aka defensive programming
-                x = Convert.ToInt32(data[0]);
-                y = Convert.ToInt32(data[1]);
-
-                if(board.updateBoard(x, y, players[turn].getSymbol) == true)
+                var input = Console.ReadLine();      // This is so the user can enter the 2 inputs on the same line,
+                if (input != null)
                 {
-                    if(board.isWinner(players[turn].getSymbol) == false)
+                    var data = input.Split(' ');            // We should prob also make a case for if he enters 1 input then presses enter, aka defensive programming
+                    x = Convert.ToInt32(data[0]);
+                    y = Convert.ToInt32(data[1]);
+                }
+
+                if(_board.UpdateBoard(x, y, _players[_turn].GetSymbol))
+                {
+                    if(_board.IsWinner(_players[_turn].GetSymbol) == false)
                     {
-                        if(board.isDraw() == false)
+                        if(_board.IsDraw() == false)
                         {
-                            switch(turn)
+                            switch(_turn)
                             {
                                 case 0:
-                                    turn = 1;
+                                    _turn = 1;
                                     break;
                                 case 1:
-                                    turn = 0;
+                                    _turn = 0;
                                     break;
                             }
                         }
@@ -150,15 +149,15 @@ namespace TicTacToe
                         {
                             Console.Clear();
                             Console.WriteLine("The game ends with a tie.");
-                            board.displayBoard();
+                            _board.DisplayBoard();
                             break;
                         }
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("Congrats, " + players[turn].getName + " won.");
-                        board.displayBoard();
+                        Console.WriteLine("Congrats, " + _players[_turn].GetName + " won.");
+                        _board.DisplayBoard();
                         break;
                     }
                 }

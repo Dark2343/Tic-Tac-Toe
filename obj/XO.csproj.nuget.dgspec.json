@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Programming\\Projects\\C#\\XO\\XO.csproj": {}
+    "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\XO.csproj": {}
   },
   "projects": {
-    "D:\\Programming\\Projects\\C#\\XO\\XO.csproj": {
+    "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\XO.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Programming\\Projects\\C#\\XO\\XO.csproj",
+        "projectUniqueName": "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\XO.csproj",
         "projectName": "XO",
-        "projectPath": "D:\\Programming\\Projects\\C#\\XO\\XO.csproj",
+        "projectPath": "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\XO.csproj",
         "packagesPath": "C:\\Users\\Dark\\.nuget\\packages\\",
-        "outputPath": "D:\\Programming\\Projects\\C#\\XO\\obj\\",
+        "outputPath": "D:\\Programming\\Projects\\C#\\Tic-Tac-Toe\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dark\\AppData\\Roaming\\NuGet\\NuGet.Config"
